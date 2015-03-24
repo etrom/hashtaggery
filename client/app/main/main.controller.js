@@ -30,6 +30,7 @@ angular.module('hashtagsApp')
       }
       $http.get("/api/things/search/"+ $scope.tagName).success(function(data){
         console.log(data, 'data')
+        console.log(data.length)
       })
       $scope.tagName = '';
     };

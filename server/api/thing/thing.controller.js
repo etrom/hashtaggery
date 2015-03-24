@@ -95,59 +95,57 @@ exports.handleauth = function(req, res) {
   });
 };
 
-var results = [];
-var pager = function(err, medias, pagination, remaining, limit) {
-  console.log('in pager');
-  results = results.concat(medias);
-  console.log(results.length, 'outer');
+// var results = [];
+// var pager = function(err, medias, pagination, remaining, limit) {
+//   console.log('in pager');
+//   results = results.concat(medias);
+//   console.log(results.length, 'outer');
 
-  if (results.length >= 180){
-    return results;
-  }
+//   if (results.length >= 180){
+//     return results;
+//   }
 
-  if (pagination.next) {
-    pagination.next(pager);
-  }
-}
+//   if (pagination.next) {
+//     pagination.next(pager);
+//   }
+// }
 
 
 //search function
 exports.search = function(req, res) {
-  var search = req.params.hashtag;
-  // make this async
-  async.series([
-    function(callback) {
+  api.tag_media_recent(req.params.hashtag, {count:200}, function(err, medias, pagination, remaining, limit) {
+    var array=[]
+    var results=[]
+    var hashtags ={}
+    var resultsArr =[]
+    for(var i=0; i < medias.length; i++){
+      array.push(medias[i].tags)
+    }
 
-      var boom = api.tag_media_recent(req.params.hashtag, pager);
-      console.log(boom, 'boom')
-      if(boom){
-        callback(null, boom);
+    for (var i =0; i < array.length; i++){
+      results = results.concat(array[i])
+    }
+
+    for (var i=0; i < results.length; i++){
+      if(hashtags[results[i]]=== undefined){
+        hashtags[results[i]]=1
+      } else {
+        hashtags[results[i]]++
       }
     }
-  ], function(results) {
-    res.json(200, results);
+
+    for(var x in hashtags) {
+
+      if (hashtags[x] > 3){
+        resultsArr.push(x)
+      }
+    }
+
+    res.json(200, resultsArr);
   });
 
-};
 
-// var param1 = 'foobar'
-// function withParams(param1, callback) {
-//   console.log('withParams function called')
-//   console.log(param1)
-//   callback()
-// }
-// function withoutParams(callback) {
-//   console.log('withoutParams function called')
-//   callback()
-// }
-// async.series([
-//   function(callback) {
-//     withParams(param1, callback)
-//   },
-//   withoutParams
-// ], function(err) {
-//   console.log('all functions complete')
-// })
+};
 
 
 
