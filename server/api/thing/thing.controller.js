@@ -84,7 +84,6 @@ exports.authorize_user = function(req, res) {
 exports.handleauth = function(req, res) {
   api.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
-      console.log(err.body, 'rar');
       res.send("Didn't work");
     } else {
       // console.log('Yay! Access token is ' + result.access_token);
@@ -109,43 +108,77 @@ exports.handleauth = function(req, res) {
 //     pagination.next(pager);
 //   }
 // }
-
+var myObj = {};
 
 //search function
 exports.search = function(req, res) {
   api.tag_media_recent(req.params.hashtag, {count:200}, function(err, medias, pagination, remaining, limit) {
-    var array=[]
-    var results=[]
-    var hashtags ={}
-    var resultsArr =[]
+    var array=[];
+    var results=[];
+    var hashtags ={};
+    var resultsArr =[];
+    var hey=[];
+
     for(var i=0; i < medias.length; i++){
-      array.push(medias[i].tags)
+      array.push(medias[i].tags);
     }
 
     for (var i =0; i < array.length; i++){
-      results = results.concat(array[i])
+      results = results.concat(array[i]);
     }
 
     for (var i=0; i < results.length; i++){
       if(hashtags[results[i]]=== undefined){
-        hashtags[results[i]]=1
+        hashtags[results[i]]=1;
       } else {
-        hashtags[results[i]]++
-      }
+        hashtags[results[i]]++;
+      };
     }
 
     for(var x in hashtags) {
-
       if (hashtags[x] > 3){
-        resultsArr.push(x)
+        resultsArr.push(x);
       }
     }
-
-    res.json(200, resultsArr);
-  });
+    console.log(resultsArr.length, '<<<<<<<<<<<')
 
 
+    function doThisAfter(err, results){
+      console.log(results, 'dinggg')
+    }
+
+    function doSomething(doThisAfter){
+      async.series([
+        function(callback) {
+          for(var i =0; i < resultsArr.length; i++) {
+            api.tag(resultsArr[i], function(err, result, remaining, limit) {
+              results = result.media_count
+              if(i = resultsArr.length-1) {
+                callback(null, results);
+              }
+            });
+
+          }
+        }
+      ], doThisAfter
+      // function(err, response) {
+      //   // response.push(response[0])
+      //   hey = response[0]
+      );
+    }
+
+
+console.log(hey, 'outside')
+  })
+  return res.json(200);
 };
+
+// function getTagInfo(tag, callback){
+//   api.tag(tag, function(err, result, remaining, limit) {
+//     var results = result.media_count
+//     callback(null, results);
+//   });
+// }
 
 
 
