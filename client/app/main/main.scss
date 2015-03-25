@@ -67,6 +67,22 @@
 body {
   // background: #e4e4e5;
 }
+.pretty {
+    height: auto;
+    margin-top: 20px;
+    font-size: 1em;
+    width: 150px;
+    -webkit-appearance: menulist-button;
+    height: 30px;
+}
+
+.count{
+    text-align: right;
+}
+
+.triClass{
+    padding:50px;
+}
 
 .triangles {
   -webkit-transform: translate(-50%, -50%);

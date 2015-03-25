@@ -94,20 +94,7 @@ exports.handleauth = function(req, res) {
   });
 };
 
-// var results = [];
-// var pager = function(err, medias, pagination, remaining, limit) {
-//   console.log('in pager');
-//   results = results.concat(medias);
-//   console.log(results.length, 'outer');
 
-//   if (results.length >= 180){
-//     return results;
-//   }
-
-//   if (pagination.next) {
-//     pagination.next(pager);
-//   }
-// }
 var myObj = {};
 
 //search function
@@ -148,7 +135,6 @@ exports.search = function(req, res) {
         })
       }
     }), function(err, result) {
-
 
 
       res.json(200, result)

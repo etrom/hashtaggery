@@ -24,12 +24,20 @@
     <i class="fa fa-instagram"></i>
   </button>
 
+    <select ng-change="sortBy(value)" class="pretty pull-right" ng-model="value">
+      <option ng-model="value" value="none" selected="selected">Sort By</option>
+      <option ng-model="value" value="random">None</option>
+      <option ng-model="value" value="popular">Popular</option>
+        <!-- <option ng-model="value" value="Sweet Spot">Sweet Spot</option>-->
+    </select>
+
+
   <form class="thing-form">
     <label>Search Hashtags Like:</label>
     <p class="input-group">
       <input type="text" class="form-control" placeholder="Type in a hashtag." ng-model="tagName">
       <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addSearch(); searchTag() ">Search</button>
+        <button type="submit" class="btn btn-primary" ng-click="addSearch(); searchTag()">Search</button>
       </span>
     </p>
   </form>
@@ -37,15 +45,16 @@
   <div class="container">
      <div class="row">
         <div class="col-lg-12">
-          <loading></loading>
+          <div ng-show="loading" class="triClass"></div>
+          <loading ng-show="loading" class="triClass"></loading>
           <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="tag in hashtags">
-            <li><a href="#"><span>{{tag.name}}</span><span> {{tag.media_count}}</span><button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
+            <li><a href="#"><span class="name">{{$index+1}}. {{tag.name}}</span><span class="count pull-right"> {{tag.media_count}}</span></a></li>
           </ul>
         </div>
       </div>
     <div class="row">
         <div class="col-lg-12">
-          <h1 class="page-header">My Recent Searches:</h1>
+          <h1 class="page-header">Recent Searches:</h1>
            <p class="gray" ng-show="awesomeThings.length < 1">You haven't searched anything yet</p>
 
 
