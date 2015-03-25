@@ -14,6 +14,12 @@ angular.module('hashtagsApp')
     $scope.data;
     $scope.loading = false;
 
+    $scope.options = [
+      { label: 'Sort By', value: 0 },
+      { label: 'None', value: 1 },
+      { label: 'Popular', value: 2 }
+    ];
+     $scope.correctlySelected = $scope.options[0];
 
 
     if($scope.awesomeThings.length < 1){
@@ -50,6 +56,7 @@ angular.module('hashtagsApp')
       $http.get("/api/things/search/"+ $scope.tagName).success(function(data){
         $scope.data = data;
         $scope.filterResults($scope.data)
+        $scope.correctlySelected = $scope.options[0];
       })
       $scope.tagName = '';
     };
@@ -62,7 +69,6 @@ angular.module('hashtagsApp')
             $scope.hashtags.push(data[i])
           }
       } else if(t === true) {
-        debugger;
         for(var i = data.length-1; i > data.length-19; i--){
           $scope.hashtags.push(data[i])
         }
@@ -70,34 +76,26 @@ angular.module('hashtagsApp')
           for(var i =0; i < 18; i++) {
             $scope.hashtags.push(data[i])
           }
-          $scope.sortBy('none');
       } else {
         $scope.hashtags = data;
-        $scope.sortBy('none');
       }
 
       $scope.loading= false;
     }
 
-    $scope.sortBy = function(keyword) {
-      console.log(keyword, 'ding')
-      if(keyword === 'popular') {
-          $scope.data.sort(function(a, b){
-            return a.media_count-b.media_count
-          })
-
-      $scope.filterResults($scope.data, true)
-
-
+    $scope.sortBy = function(val) {
+      console.log(val, 'ding')
+      if(val === 2) {
+        $scope.data.sort(function(a, b){
+          return a.media_count-b.media_count
+        })
+        $scope.filterResults($scope.data, true)
       }
-      else if(keyword === 'random') {
-        console.log('changing to random')
-        debugger;
+     if(val === 1) {
         $scope.filterResults($scope.data)
-      } else if(keyword === 'none') {
-        console.log('changing to none')
-        debugger;
-        $scope.value ='none';
+      }
+      if(val === 0) {
+        $scope.filterResults($scope.data)
       }
 
     }

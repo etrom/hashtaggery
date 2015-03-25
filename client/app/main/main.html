@@ -24,12 +24,11 @@
     <i class="fa fa-instagram"></i>
   </button>
 
-    <select ng-change="sortBy(value)" class="pretty pull-right" ng-model="value">
-      <option ng-model="value" value="none" selected="selected">Sort By</option>
-      <option ng-model="value" value="random">None</option>
-      <option ng-model="value" value="popular">Popular</option>
-        <!-- <option ng-model="value" value="Sweet Spot">Sweet Spot</option>-->
-    </select>
+
+  <select ng-model="correctlySelected" class="pretty pull-right" ng-options="opt as opt.label for opt in options" ng-change="sortBy(correctlySelected.value)">
+  </select>
+
+
 
 
   <form class="thing-form">
