@@ -10,16 +10,19 @@
 #banner h1 {
     font-size: 60px;
     line-height: 1;
-    letter-spacing: -1px;
+    letter-spacing: 6px;
 }
 
 .hero-unit {
     position: relative;
+    height: 300px;
     padding: 30px 15px;
     color: #F5F5F5;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+    // background: #215A6D;
+    background-size: 1070px;
+    background-image: url("../assets/images/bannweb.jpg")
 }
 
 .footer {
@@ -29,7 +32,29 @@
     border-top: 1px solid #E5E5E5;
 }
 
+.lead{
+  padding-bottom: 75px;
+}
 
+
+.close{
+    width: 50px;
+    height: 25px;
+}
+
+.insta {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.bannertxt{
+  background-color: rgb(12, 116, 111);
+  width: 575px;
+  height: 150px;
+  text-align: left;
+  box-shadow: 4px 11px 8px rgba(0, 0, 0, 0.66);
+
+}
 /*loading styles*/
 @-webkit-keyframes pulse {
   0% {
@@ -83,6 +108,8 @@ body {
 .triClass{
     padding:50px;
 }
+
+/*loading styles*/
 
 .triangles {
   -webkit-transform: translate(-50%, -50%);
@@ -167,4 +194,24 @@ body {
   -webkit-animation-delay: -500ms;
   -moz-animation-delay: -500ms;
   animation-delay: -500ms;
+}
+/*end loading styles*/
+
+
+.col-lg-2.insta {
+  width: 10%;
+  padding-left: 20px;
+}
+
+.col-md-3.insta {
+  width: 65%;
+  padding-left: 20px;
+}
+.col-sm-3.insta {
+  width: 65%;
+  padding-left: 20px;
+}
+.col-xs-12.insta {
+  width: 80%;
+  padding-left: 20px;
 }

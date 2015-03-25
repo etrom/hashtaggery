@@ -32,7 +32,12 @@ angular.module('hashtagsApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
-    $scope.addSearch = function() {
+    $scope.addSearch = function(tag) {
+      if(typeof tag !== 'string'){
+        return;
+      } else if(tag) {
+        $scope.tagName = tag;
+      }
       if($scope.tagName === '') {
         return;
       }
@@ -47,7 +52,12 @@ angular.module('hashtagsApp')
       socket.unsyncUpdates('thing');
     });
 
-    $scope.searchTag = function() {
+    $scope.searchTag = function(tag) {
+      if(typeof tag !== 'string'){
+        return;
+      } else if(tag) {
+        $scope.tagName = tag;
+      }
       $scope.hashtags =[];
       if($scope.tagName === '') {
         return;
@@ -58,6 +68,7 @@ angular.module('hashtagsApp')
         $scope.filterResults($scope.data)
         $scope.correctlySelected = $scope.options[0];
       })
+      $scope.results = $scope.tagName;
       $scope.tagName = '';
     };
 
