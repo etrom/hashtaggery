@@ -2,14 +2,15 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
+    <h1>Hashtaggery</h1>
+    <p class="lead">all the info you need about hashtags to help gain followers or grow your business</p>
     <img src="assets/images/yeoman.png" alt="I'm Yeoman">
   </div>
 </header>
 
+
 <div class="container">
-  <form class="thing-form">
+ <!--  <form class="thing-form">
     <label>Syncs in realtime across clients</label>
     <p class="input-group">
       <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newThing">
@@ -17,32 +18,58 @@
         <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>
       </span>
     </p>
-  </form>
+  </form> -->
   <!--  <button class="btn" ng-click="searchTag()"><i class="fa fa-instagram"></i> | Login</button> -->
    <button class="btn btn-social-icon btn-instagram" ng-click="login()">
     <i class="fa fa-instagram"></i>
   </button>
 
   <form class="thing-form">
-    <label>Search Hashtag</label>
+    <label>Search Hashtags Like:</label>
     <p class="input-group">
       <input type="text" class="form-control" placeholder="Type in a hashtag." ng-model="tagName">
       <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="searchTag()">Search</button>
+        <button type="submit" class="btn btn-primary" ng-click="addSearch(); searchTag() ">Search</button>
       </span>
     </p>
   </form>
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
-      </ul>
-    </div>
-  </div>
-
-
 </div>
+  <div class="container">
+     <div class="row">
+        <div class="col-lg-12">
+          <loading></loading>
+          <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="tag in hashtags">
+            <li><a href="#"><span>{{tag.name}}</span><span> {{tag.media_count}}</span><button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
+          </ul>
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">My Recent Searches:</h1>
+           <p class="gray" ng-show="awesomeThings.length < 1">You haven't searched anything yet</p>
+
+
+
+
+          <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+            <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
+          </ul>
+        </div>
+      </div>
+      <!--popular tags go here-->
+      <!-- <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Popular Tags:</h1>
+           <p class="gray" ng-show="awesomeThings.length < 1">You haven't searched anything yet</p>
+          <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+            <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
+          </ul>
+        </div>
+      </div> -->
+
+    </div>
+
+
 
 <footer class="footer">
   <div class="container">

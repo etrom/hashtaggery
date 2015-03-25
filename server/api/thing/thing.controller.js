@@ -140,45 +140,23 @@ exports.search = function(req, res) {
         resultsArr.push(x);
       }
     }
-    console.log(resultsArr.length, '<<<<<<<<<<<')
+    async.series(resultsArr.map(function(arrResult, i) {
+      return function(callback) {
+        api.tag(arrResult, function(err, result, remaining, limit) {
+          if (err) { return callback(err); }
+          callback(null, result);
+        })
+      }
+    }), function(err, result) {
 
 
-    function doThisAfter(err, results){
-      console.log(results, 'dinggg')
-    }
 
-    function doSomething(doThisAfter){
-      async.series([
-        function(callback) {
-          for(var i =0; i < resultsArr.length; i++) {
-            api.tag(resultsArr[i], function(err, result, remaining, limit) {
-              results = result.media_count
-              if(i = resultsArr.length-1) {
-                callback(null, results);
-              }
-            });
+      res.json(200, result)
+    })
 
-          }
-        }
-      ], doThisAfter
-      // function(err, response) {
-      //   // response.push(response[0])
-      //   hey = response[0]
-      );
-    }
-
-
-console.log(hey, 'outside')
   })
-  return res.json(200);
 };
 
-// function getTagInfo(tag, callback){
-//   api.tag(tag, function(err, result, remaining, limit) {
-//     var results = result.media_count
-//     callback(null, results);
-//   });
-// }
 
 
 
