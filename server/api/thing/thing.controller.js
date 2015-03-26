@@ -89,7 +89,7 @@ exports.handleauth = function(req, res) {
       // console.log('Yay! Access token is ' + result.access_token);
       // res.redirect('http://localhost:9000/?access_token='+result.access_token);
         res.redirect('/');
-
+        console.log(result)
     }
   });
 };

@@ -258,7 +258,7 @@ module.exports = function (grunt) {
       js: ['<%= yeoman.dist %>/public/{,*/}*.js'],
       options: {
         assetsDirs: [
-          '<%= yeoman.dist %>/images',
+
           '<%= yeoman.dist %>/public',
           '<%= yeoman.dist %>/public/assets/images'
         ],

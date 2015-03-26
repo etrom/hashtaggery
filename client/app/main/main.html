@@ -1,23 +1,13 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <header class="hero-unit" id="banner">
-  <div class="container pull-left bannertxt">
-    <h1>Hashtaggery</h1>
-    <p class="lead">find the right hashtags</p>
-
-
-
-
-
-
-  </div>
   <div class="row">
-  <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-  <a class="insta btn btn-block btn-social btn-instagram" ng-click="login()">
-    <i class="fa fa-instagram fa-2x"></i> Login
-  </a>
-</div>
-
+    <div class="col-lg-12">
+    <img class="pull-left logo" width="55%" src="assets/images/hashtaggerylogo2.png" alt="logo">
+    <a class="insta pull-left btn btn-lg btn-group btn-social btn-instagram" ng-click="login()">
+      <i class="fa fa-instagram fa-2x"></i> Login
+    </a>
+  </div>
 </header>
 
 
@@ -31,7 +21,7 @@
       </span>
     </p>
   </form> -->
-  <!--  <button class="btn" ng-click="searchTag()"><i class="fa fa-instagram"></i> | Login</button> -->
+
 
 <div class="row">
   <div class="col-lg-2 pull-right">
@@ -42,10 +32,11 @@
 </div>
 
 
+<div ng-show="accesstoken"class="alert alert-info" role="alert">In order to provide you with realtime results, you must log into instagram.</div>
 
 
   <form class="thing-form">
-    <label>Search Hashtags Like:</label>
+    <h1>Search Hashtags Like:</h1>
     <p class="input-group">
       <input type="text" class="form-control" placeholder="Type in a hashtag to find like terms." ng-model="tagName">
       <span class="input-group-btn">
@@ -58,8 +49,9 @@
      <div class="row">
         <div class="col-lg-12">
           <loading ng-show="loading" class="triClass"></loading>
+          <h1 ng-show="results && !loading">Results for <span class="hashtag">#{{results}}</span>:</h1>
           <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="tag in hashtags">
-            <li ng-click="addSearch(tag.name);searchTag(tag.name)"><a href="#"><span class="name">{{$index+1}}. {{tag.name}}</span><span class="count pull-right"> {{tag.media_count}}</span></a></li>
+            <li ng-click="addSearch(tag.name);searchTag(tag.name)"><a href="#"><span class="number">{{$index+1}}.</span><span class="hashtag"> #{{tag.name}}</span><span class="count pull-right"> {{tag.media_count}}</span></a></li>
           </ul>
         </div>
       </div>
@@ -72,7 +64,7 @@
 
 
           <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-            <li ng-click="addSearch(thing.name); searchTag(thing.name)"><a href="#" tooltip="{{thing.info}}" >{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing); addSearch($event); searchTag($event)">&times;</button></a></li>
+            <li ><a class="hashtag" href="#" tooltip="{{thing.info}}">#{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing); addSearch($event); searchTag($event)">&times;</button></a></li>
           </ul>
         </div>
       </div>
@@ -93,8 +85,7 @@
 
 <footer class="footer">
   <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+      <p>results from instagram api |
+        </p>
   </div>
 </footer>

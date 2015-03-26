@@ -13,6 +13,11 @@
     letter-spacing: 6px;
 }
 
+h2{
+  color:white;
+  font-style: italic;
+}
+
 .hero-unit {
     position: relative;
     height: 300px;
@@ -32,21 +37,29 @@
     border-top: 1px solid #E5E5E5;
 }
 
-.lead{
+.lead {
   padding-bottom: 75px;
 }
+.logo {
+  margin-left: 35px;
+  margin-top: 60px;
+}
 
-
-.close{
-    width: 50px;
-    height: 25px;
+.close {
+  width: 50px;
+  height: 25px;
 }
 
 .insta {
-  margin-left: 20px;
-  margin-right: 20px;
+  position: absolute;
+  right: 50px;
 }
 
+
+.hashtag{
+  color: gray;
+  font-style: italic;
+}
 .bannertxt{
   background-color: rgb(12, 116, 111);
   width: 575px;

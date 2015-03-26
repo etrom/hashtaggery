@@ -13,6 +13,7 @@ angular.module('hashtagsApp')
     $scope.hashtags =[];
     $scope.data;
     $scope.loading = false;
+    $scope.results;
 
     $scope.options = [
       { label: 'Sort By', value: 0 },
@@ -33,7 +34,8 @@ angular.module('hashtagsApp')
     });
 
     $scope.addSearch = function(tag) {
-      if(typeof tag !== 'string'){
+      debugger;
+      if(typeof tag === 'object'){
         return;
       } else if(tag) {
         $scope.tagName = tag;
@@ -53,13 +55,16 @@ angular.module('hashtagsApp')
     });
 
     $scope.searchTag = function(tag) {
-      if(typeof tag !== 'string'){
+      console.log('searching')
+      if(typeof tag === 'object'){
+        $scope.results = false;
         return;
       } else if(tag) {
         $scope.tagName = tag;
       }
       $scope.hashtags =[];
       if($scope.tagName === '') {
+        $scope.results = false;
         return;
       }
       $scope.loading = true;
