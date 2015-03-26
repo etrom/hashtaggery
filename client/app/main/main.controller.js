@@ -13,7 +13,7 @@ angular.module('hashtagsApp')
     //select tag
     $scope.options = [
       { label: 'Sort By', value: 0 },
-      { label: 'None', value: 1 },
+      { label: 'Most Recent', value: 1 },
       { label: 'Popular', value: 2 }
     ];
     $scope.correctlySelected = $scope.options[0];
