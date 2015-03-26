@@ -55,11 +55,16 @@ h2{
   right: 50px;
 }
 
+a .hashtag:hover {
+  color: #428bca;
 
-.hashtag{
+}
+
+.hashtag {
   color: gray;
   font-style: italic;
 }
+
 .bannertxt{
   background-color: rgb(12, 116, 111);
   width: 575px;

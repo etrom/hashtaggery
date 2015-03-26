@@ -7,7 +7,7 @@ angular.module('hashtagsApp')
   //       templateUrl: 'app/scripts/directive/loading.html'
   //     }
   //   })
-  .controller('MainCtrl', function ($scope, $location, $http, $window, socket) {
+  .controller('MainCtrl', function ( $scope, $location, $http, $window, socket) {
     $scope.awesomeThings = [];
     $scope.empty = true;
     $scope.hashtags =[];
@@ -46,8 +46,12 @@ angular.module('hashtagsApp')
       $http.post('/api/things', { name:$scope.tagName });
     };
 
-    $scope.deleteThing = function(thing) {
+    $scope.deleteThing = function($event, thing) {
+      console.log($event);
+      debugger;
       $http.delete('/api/things/' + thing._id);
+      $event.stopPropagation();
+      $event.preventDefault();
     };
 
     $scope.$on('$destroy', function () {
@@ -69,6 +73,7 @@ angular.module('hashtagsApp')
       }
       $scope.loading = true;
       $http.get("/api/things/search/"+ $scope.tagName).success(function(data){
+        debugger;
         $scope.data = data;
         $scope.filterResults($scope.data)
         $scope.correctlySelected = $scope.options[0];
