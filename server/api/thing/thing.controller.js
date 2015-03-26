@@ -88,7 +88,7 @@ exports.handleauth = function(req, res) {
     } else {
       // console.log('Yay! Access token is ' + result.access_token);
 
-      res.redirect('../?access_token='+result.access_token);
+      res.redirect('/?access_token='+result.access_token);
         // res.redirect('/');
     }
   });
