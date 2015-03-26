@@ -1,19 +1,15 @@
 'use strict';
 
 angular.module('hashtagsApp')
-  // .directive('ngLoading', function () {
-  //     return {
-  //       restrict: 'A',
-  //       templateUrl: 'app/scripts/directive/loading.html'
-  //     }
-  //   })
-  .controller('MainCtrl', function ( $scope, $location, $http, $window, socket) {
+  .controller('MainCtrl', function ( $scope, $timeout, $location, $http, $window, socket) {
     $scope.awesomeThings = [];
     $scope.empty = true;
     $scope.hashtags =[];
     $scope.data;
     $scope.loading = false;
     $scope.results;
+    $scope.accessToken = $location.$$search.access_token;
+    console.log($scope.accessToken, 'yooo')
 
     //select tag
     $scope.options = [
@@ -21,9 +17,12 @@ angular.module('hashtagsApp')
       { label: 'None', value: 1 },
       { label: 'Popular', value: 2 }
     ];
-
     $scope.correctlySelected = $scope.options[0];
 
+
+    $scope.timesOut = function() {
+        $scope.clicked = false;
+    }
 
     if($scope.awesomeThings.length < 1){
       $scope.empty = false;
@@ -63,34 +62,43 @@ angular.module('hashtagsApp')
     });
 
     $scope.searchTag = function(tag) {
-      $scope.error=false;
-      if(typeof tag === 'object'){
-        $scope.results = false;
-        return;
-      } else if(tag) {
-        $scope.tagName = tag;
-      }
-      $scope.hashtags =[];
-      if($scope.tagName === '') {
-        $scope.results = false;
-        return;
-      }
-      $scope.loading = true;
-      $http.get("/api/things/search/"+ $scope.tagName).success(function(data) {
-        $scope.addToRecent($scope.tagName);
-        $scope.data = data;
-        $scope.filterResults($scope.data)
-        $scope.correctlySelected = $scope.options[0];
-        $scope.tagName = '';
+      if($scope.accessToken){
+        $scope.error=false;
+        if(typeof tag === 'object'){
+          $scope.results = false;
+          return;
+        } else if(tag) {
+          $scope.tagName = tag;
+        }
+        $scope.hashtags =[];
 
-      }).error(function(err){
-        $scope.error = err.err
-        $scope.loading = false;
+        if($scope.tagName === '') {
+          $scope.results = false;
+          return;
+        }
+
+        $scope.loading = true;
+        $http.get("/api/things/search/"+ $scope.tagName).success(function(data) {
+          $scope.addToRecent($scope.tagName);
+          $scope.data = data;
+          $scope.filterResults($scope.data)
+          $scope.correctlySelected = $scope.options[0];
+          $scope.tagName = '';
+
+        }).error(function(err){
+          $scope.error = err.err
+          $scope.loading = false;
+          $scope.tagName = '';
+          $scope.randScolding();
+          return;
+        })
+        $scope.results = $scope.tagName;
+
+      } else {
+        $scope.clicked = true;
+        var newTime = $timeout($scope.timesOut,10000);
         $scope.tagName = '';
-        $scope.randScolding();
-        return;
-      })
-      $scope.results = $scope.tagName;
+      }
     };
 
     $scope.filterResults= function(data, t) {

@@ -13,7 +13,9 @@
 
 <div class="container">
   <div class="row">
+
     <div class="col-lg-2 pull-right">
+
 
       <select ng-model="correctlySelected" class="pretty" ng-options="opt as opt.label for opt in options" ng-change="sortBy(correctlySelected.value)">
       </select>
@@ -21,7 +23,7 @@
   </div>
 
 
-  <div ng-show="accesstoken" class="alert alert-info" role="alert">In order to provide you with realtime results, you must log into instagram.</div>
+
 
 
   <form class="thing-form">
@@ -37,6 +39,7 @@
   <div class="container">
      <div class="row">
         <div class="col-lg-12">
+          <div ng-show="!accessToken && clicked" class="alert alert-info access" role="alert">In order to provide you with realtime results, you must log into instagram to search.</div>
           <loading ng-show="loading" class="triClass"></loading>
           <h1 ng-show="results && !loading">Results for <span class="hashtag">#{{results}}</span>:</h1>
           <div ng-show="error" class="alert alert-danger" role="alert"><h3>{{profanity}}</h3><b>Instagram Search Error:</b> {{error}}</div>
