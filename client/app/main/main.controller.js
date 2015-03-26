@@ -9,7 +9,6 @@ angular.module('hashtagsApp')
     $scope.loading = false;
     $scope.results;
     $scope.accessToken = $location.$$search.access_token;
-    console.log($scope.accessToken, 'yooo')
 
     //select tag
     $scope.options = [
@@ -24,6 +23,7 @@ angular.module('hashtagsApp')
         $scope.clicked = false;
     }
 
+
     if($scope.awesomeThings.length < 1){
       $scope.empty = false;
     }
@@ -35,7 +35,6 @@ angular.module('hashtagsApp')
     $scope.randScolding=function(){
       var randProfanity = ['Ew! No.', 'You hug your Momma with those hands???', "Lets keep it PG!", 'Watch it! There are children about!', 'CONFOUNDED!', "Really? Let's try something more appropriate.", "I'm telling!", "Dude! We don't use words like that.", 'Ahh, we meet again.', '@#$%! not cool man, not cool.', 'Act your age, not your shoe size!' ]
       var rand = Math.floor(Math.random() * (randProfanity.length - 0)) + 0;
-      console.log(rand)
       $scope.profanity = randProfanity[rand];
     }
 
