@@ -87,9 +87,8 @@ exports.handleauth = function(req, res) {
       res.send("Didn't work");
     } else {
       // console.log('Yay! Access token is ' + result.access_token);
-      // res.redirect('http://localhost:9000/?access_token='+result.access_token);
-        res.redirect('/');
-        console.log(result)
+      res.redirect('http://localhost:9000/?access_token='+result.access_token);
+        // res.redirect('/');
     }
   });
 };
@@ -105,6 +104,10 @@ exports.search = function(req, res) {
     var hashtags ={};
     var resultsArr =[];
     var hey=[];
+
+    if(err){
+      return res.json(400, {err: err.error_message})
+    }
 
     for(var i=0; i < medias.length; i++){
       array.push(medias[i].tags);

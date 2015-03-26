@@ -33,7 +33,7 @@ angular.module('hashtagsApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
-    $scope.addSearch = function(tag) {
+    $scope.addToRecent = function(tag) {
       debugger;
       if(typeof tag === 'object'){
         return;
@@ -47,8 +47,6 @@ angular.module('hashtagsApp')
     };
 
     $scope.deleteThing = function($event, thing) {
-      console.log($event);
-      debugger;
       $http.delete('/api/things/' + thing._id);
       $event.stopPropagation();
       $event.preventDefault();
@@ -59,7 +57,8 @@ angular.module('hashtagsApp')
     });
 
     $scope.searchTag = function(tag) {
-      console.log('searching')
+      debugger;
+      $scope.error=false;
       if(typeof tag === 'object'){
         $scope.results = false;
         return;
@@ -72,14 +71,21 @@ angular.module('hashtagsApp')
         return;
       }
       $scope.loading = true;
-      $http.get("/api/things/search/"+ $scope.tagName).success(function(data){
-        debugger;
+      $http.get("/api/things/search/"+ $scope.tagName).success(function(data) {
+        $scope.addToRecent($scope.tagName);
         $scope.data = data;
         $scope.filterResults($scope.data)
         $scope.correctlySelected = $scope.options[0];
+        $scope.tagName = '';
+
+      }).error(function(err){
+          $scope.error = err.err
+          $scope.loading = false;
+          $scope.tagName = '';
+
+          return;
       })
       $scope.results = $scope.tagName;
-      $scope.tagName = '';
     };
 
     $scope.filterResults= function(data, t) {
