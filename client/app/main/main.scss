@@ -231,8 +231,16 @@ body {
 // }
 
 /*fullscreen when bigger than 650 do*/
+@media (min-width: 200px) {
+    .logo {
+      margin-top: 176px;
+      width: 260px;
+    }
+}
 
-@media (min-width: 300px) {
+
+
+@media (min-width: 350px) {
     .logo {
       margin-top: 168px;
       width: 315px;

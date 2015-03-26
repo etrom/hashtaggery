@@ -79,6 +79,7 @@ var redirect_uri = instagramAPI.redirectUri + 'api/things/handleauth';
 
 exports.authorize_user = function(req, res) {
     res.redirect(api.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+
 };
 
 exports.handleauth = function(req, res) {
