@@ -50,7 +50,7 @@
         <div class="col-lg-12">
           <loading ng-show="loading" class="triClass"></loading>
           <h1 ng-show="results && !loading">Results for <span class="hashtag">#{{results}}</span>:</h1>
-          <div ng-show="error" class="alert alert-danger" role="alert">Instagram Search Error: {{error}}</div>
+          <div ng-show="error" class="alert alert-danger" role="alert"><h3>{{profanity}}</h3><b>Instagram Search Error:</b> {{error}}</div>
           <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="tag in hashtags">
             <li ng-click="searchTag(tag.name)"><a href="#"><span class="number">{{$index+1}}.</span><span class="hashtag"> #{{tag.name}}</span><span class="count pull-right"> {{tag.media_count}}</span></a></li>
           </ul>
@@ -82,7 +82,8 @@
 
 <footer class="footer">
   <div class="container">
-      <p>results from instagram api |
+      <p>Contact <a href="mailto: hashtaggery.me@gmail.com">hashtaggery.me@gmail.com</a> <br>for questions or comments.
         </p>
+        <img class="text-center made" src="assets/images/madewlovenyc.png" alt="madewithlove">
   </div>
 </footer>

@@ -33,6 +33,12 @@ angular.module('hashtagsApp')
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
+    $scope.randScolding=function(){
+      var randProfanity = ['Ew! No.', 'You hug your Momma with those hands???', "Lets keep it PG!", 'Watch it! There are children about!', 'CONFOUNDED!', "Really? Let's try something more appropriate.", "I'm telling!", "Dude! We don't use words like that.", 'Ahh, we meet again.', '@#$%! not cool man, not cool.', 'Act your age, not your shoe size!' ]
+      var rand = Math.floor(Math.random() * (randProfanity.length - 0)) + 0;
+      console.log(rand)
+      $scope.profanity = randProfanity[rand];
+    }
 
     $scope.addToRecent = function(tag) {
       if(typeof tag === 'object'){
@@ -81,6 +87,7 @@ angular.module('hashtagsApp')
         $scope.error = err.err
         $scope.loading = false;
         $scope.tagName = '';
+        $scope.randScolding();
         return;
       })
       $scope.results = $scope.tagName;
@@ -124,7 +131,6 @@ angular.module('hashtagsApp')
     }
 
     $scope.login = function() {
-
       $window.location.href = "/api/things/authorize_user"
     };
 
