@@ -14,7 +14,6 @@ angular.module('hashtagsApp')
         restrict: 'E',
         scope: true,
         link: function (scope, elem, attrs) {
-
             scope.loadingStuff = function() {
                 var loadingArray = ['let me think',
                 'firing up the hamster',
@@ -29,15 +28,24 @@ angular.module('hashtagsApp')
                 '#pieceofcake',
                 'okay I can do this'];
                 var rand = Math.floor(Math.random() * (loadingArray.length - 0)) + 0;
+                console.log(rand, 'random')
                 return loadingArray[rand];
             }
 
             scope.fun = function() {
-                debugger;
                 scope.loadingMess = scope.loadingStuff()
             }
+            var timesRun=0
             scope.fun();
-            var newTime = $interval(scope.fun, 3500);
+            var newTime = $interval(function(){
+                timesRun += 1;
+                scope.fun();
+                if(timesRun >= 5) {
+                    $interval.cancel(newTime);
+                }
+             }, 3500);
+
+
         }
     };
 }]);

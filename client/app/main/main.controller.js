@@ -79,7 +79,6 @@ angular.module('hashtagsApp')
 
         $scope.loading = true;
         $http.get("/api/things/search/"+ $scope.tagName).success(function(data) {
-          debugger;
           $scope.addToRecent($scope.tagName);
           $scope.data = data;
           $scope.filterResults($scope.data)
