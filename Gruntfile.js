@@ -247,18 +247,30 @@ module.exports = function (grunt) {
     useminPrepare: {
       html: ['<%= yeoman.client %>/index.html'],
       options: {
-        dest: '<%= yeoman.dist %>/public'
+        dest: '<%= yeoman.dist %>/public',
+        flow:{
+          html:{
+            steps: {
+              js: ['concat', 'uglifyjs'],
+              css: ['cssmin']
+            },
+            post:{}
+          }
+        }
       }
     },
 
     // Performs rewrites based on rev and the useminPrepare configuration
+
+
+
     usemin: {
       html: ['<%= yeoman.dist %>/public/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/public/{,*/}*.css'],
+      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       js: ['<%= yeoman.dist %>/public/{,*/}*.js'],
       options: {
         assetsDirs: [
-
+          '<%= yeoman.dist %>/images',
           '<%= yeoman.dist %>/public',
           '<%= yeoman.dist %>/public/assets/images'
         ],
@@ -266,8 +278,16 @@ module.exports = function (grunt) {
         patterns: {
           js: [
             [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
+          ],
+           css: [
+            [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the CSS to reference our revved images']
           ]
         }
+      }
+    },
+    cssmin:{
+      options:{
+        root: '<%= yeoman.app %>'
       }
     },
 
