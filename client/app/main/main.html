@@ -42,6 +42,7 @@
           <div ng-show="!accessToken && clicked" class="alert alert-info access" role="alert">In order to provide you with realtime results, you must log into instagram to search.</div>
           <loading ng-if="loading" class="triClass"></loading>
           <h1 ng-show="results && !loading">Results for <span class="hashtag">#{{results}}</span>:</h1>
+          <div ng-show="oops" class="alert alert-warning" role="alert"><h3>{{oops}}</h3>Looks like this isn't a very popular tag, please try again.</div>
           <div ng-show="error" class="alert alert-danger" role="alert"><h3>{{profanity}}</h3><b>Instagram Search Error:</b> {{error}}</div>
           <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="tag in hashtags">
             <li ng-click="searchTag(tag.name)"><a href="#"><span class="number">{{$index+1}}.</span><span class="hashtag"> #{{tag.name}}</span><span class="count pull-right"> {{tag.media_count}}</span></a></li>

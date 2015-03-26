@@ -8,7 +8,7 @@
  */
 angular.module('hashtagsApp')
 
-.directive('loading', ['$timeout', '$interval', function($interval, $timeout) {
+.directive('loading', ['$interval','$timeout', function($interval, $timeout) {
    return {
         templateUrl: 'app/scripts/directives/loading.html',
         restrict: 'E',
@@ -16,20 +16,28 @@ angular.module('hashtagsApp')
         link: function (scope, elem, attrs) {
 
             scope.loadingStuff = function() {
-                debugger;
-                var loadingArray = ['maybe try something...more specific','counting hashtags', "hmm...this is a hard one",'these should be good','okay I can do this'];
+                var loadingArray = ['let me think',
+                'firing up the hamster',
+                'beaming hashtags to your screen',
+                'eating ice cream, oh wait!',
+                'syncing hashtaggery',
+                "it's not hard",
+                'fabricating hashtags',
+                "hmm...this is a hard one",
+                'locating gigapixels',
+                'combing hairy data',
+                '#pieceofcake',
+                'okay I can do this'];
                 var rand = Math.floor(Math.random() * (loadingArray.length - 0)) + 0;
-                scope.loadingMess = loadingArray[rand];
-                return scope.loadingMess;
+                return loadingArray[rand];
             }
-            // // scope.loadingStuff();
 
-            var newTime = $interval( scope.loadingStuff, 1000);
-
-
-
-
-
+            scope.fun = function() {
+                debugger;
+                scope.loadingMess = scope.loadingStuff()
             }
+            scope.fun();
+            var newTime = $interval(scope.fun, 3500);
+        }
     };
 }]);

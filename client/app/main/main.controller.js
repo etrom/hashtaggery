@@ -61,6 +61,7 @@ angular.module('hashtagsApp')
     });
 
     $scope.searchTag = function(tag) {
+      $scope.oops = false;
       if($scope.accessToken){
         $scope.error=false;
         if(typeof tag === 'object'){
@@ -78,11 +79,16 @@ angular.module('hashtagsApp')
 
         $scope.loading = true;
         $http.get("/api/things/search/"+ $scope.tagName).success(function(data) {
+          debugger;
           $scope.addToRecent($scope.tagName);
           $scope.data = data;
           $scope.filterResults($scope.data)
           $scope.correctlySelected = $scope.options[0];
           $scope.tagName = '';
+          if(data.length <= 0){
+            debugger;
+            $scope.oops = "Oops..."
+          }
 
         }).error(function(err){
           $scope.error = err.err
@@ -101,7 +107,7 @@ angular.module('hashtagsApp')
     };
 
     $scope.filterResults= function(data, t) {
-      $scope.hashtags =[];
+      $scope.hashtags=[];
 
       if (t === true && data.length < 18) {
           for(var i = data.length-1; i >= 0; i--) {
