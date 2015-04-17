@@ -32,7 +32,7 @@ angular.module('hashtagsApp')
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
-    $scope.randScolding=function(){
+    $scope.randScolding = function(){
       var randProfanity = ['Ew! No.', 'You hug your Momma with those hands???', "Lets keep it PG!", 'Watch it! There are children about!', 'CONFOUNDED!', "Really? Let's try something more appropriate.", "I'm telling!", "Dude! We don't use words like that.", 'Ahh, we meet again.', '@#$%! not cool man, not cool.', 'Act your age, not your shoe size!' ]
       var rand = Math.floor(Math.random() * (randProfanity.length - 0)) + 0;
       $scope.profanity = randProfanity[rand];

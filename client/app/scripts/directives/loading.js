@@ -35,7 +35,8 @@ angular.module('hashtagsApp')
             scope.fun = function() {
                 scope.loadingMess = scope.loadingStuff()
             }
-            var timesRun=0
+
+            var timesRun = 0;
             scope.fun();
             var newTime = $interval(function(){
                 timesRun += 1;
